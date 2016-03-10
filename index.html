@@ -1,1 +1,1277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<title>
+WebSphere Administration
+</title>
 
+<head>
+
+<style type="text/css">
+ table { 
+  vertical-align: top ;
+  caption-side : right ;
+ }
+ div:first-letter { font-size:large }
+ a.x:visited {color: #0000ff}
+ a.x:hover { background: #66ff66 ; font-size: 105% }
+ BODY {
+  font-family: Verdana, Arial;
+  font-size:smaller;
+ }
+
+ pre.code {
+  font-family: cg-times, courier new, courier;
+  font-size:75% ;
+  border: 1px solid black;
+  background-color: #d0d0d0;
+ }
+
+ pre.y {
+   font-size:75% ;
+   font-family:cg-times ;
+   border-style: solid ;
+   border-width: 1px 1px 1px 1px ;
+   border-color: red ;
+ }
+ pre.z {
+  font-family: cg-times, courier new, courier;
+  font-size:75% ;
+  border: 1px solid black;
+  background-color: #d0d0d0;
+ }
+ pre.zold {
+   font-size:75% ;
+   font-family:cg-times ;
+   background-color:black ;
+   color:black ;
+   border-style: solid ;
+   border-width: 1px 1px 1px 1px ;
+   border-color: red ;
+ }
+</style>
+<CENTER><a name="top">
+<H1>WebSphere Administration</H1>
+<H2>WebSphere Admin Utility</H2>
+</CENTER>
+</head>
+<body>
+<TABLE border=1 cellpadding=4 COLS=2  valign=top >
+<TD WIDTH=50% > 
+<BR>
+<UL>
+ <LI><a class="x" href="#A.0">I n t r o d u c t i o n</a><br>
+ <UL>
+  <LI><a class="x" href="#A.1">Summary</a><br>
+  <LI><a class="x" href="#A.2">Pespective</a><br>
+ </UL>
+ <LI><a class="x" href="#B.0">E n v i r o n m e n t s</a><br>
+ <UL>
+  <LI><a class="x" href="#B.1">Production environment</a><br>
+  <LI><a class="x" href="#B.2">Pre-Production environment</a><br>
+  <LI><a class="x" href="#B.3">XML export environment</a><br>
+ </UL>
+ <LI><a class="x" href="#G.0">S e r v e r s</a><br>
+ <UL>
+  <LI><a class="x" href="#G.1">Single Servers</a><br>
+  <UL>
+   <LI><a class="x" href="#G.1.1">Server Show</a><br>
+   <LI><a class="x" href="#G.1.2">Server Stop</a><br>
+   <LI><a class="x" href="#G.1.3">Server Start</a><br>
+  </UL>
+  <LI><a class="x" href="#G.2">Server Groups</a><br>
+  <UL>
+   <LI><a class="x" href="#G.2.1">ServerGroup Show</a><br>
+   <LI><a class="x" href="#G.2.2">ServerGroup Stop</a><br>
+   <LI><a class="x" href="#G.2.3">ServerGroup Start</a><br>
+   <LI><a class="x" href="#G.2.4">ServerGroup Ripple</a><br>
+  </UL>
+ </UL>
+
+  <LI><a class="x" href="#H.1">J a v a &nbsp; V i r t u a l &nbsp; M a c h i n e s (JVM) </a><br>
+  <UL>
+   <LI><a class="x" href="#H.1.1">JVM System Properties (JVMSP)</a><br>
+   <UL>
+    <LI><a class="x" href="#H.1.1.1">JVMSP XSLT Editors</a><br>
+    <UL>
+     <LI><a class="x" href="#H.1.1.1.1">single changes</a><br>
+     <LI><a class="x" href="#H.1.1.1.2">batch changes</a><br>
+    </UL>
+   </UL>
+  </UL>
+
+</UL>
+
+<TD> 
+
+<UL>
+ <LI><a class="x" href="#D.0">P l u g i n s</a><br>
+ <UL>
+  <LI><a class="x" href="#D.1">Plugin Regeneration</a><br>
+  <LI><a class="x" href="#D.2">Plugin Deployment</a><br>
+ </UL>
+ <LI><a class="x" href="#C.0">A p p l i c a t i o n s</a><br>
+ <UL>
+  <LI><a class="x" href="#C.2">Network Deployments</a><br>
+  <UL>
+   <LI><a class="x" href="#C.2.1">EAR Install</a><br>
+   <LI><a class="x" href="#C.2.2">EAR Install Warm</a><br>
+   <LI><a class="x" href="#C.2.3">EAR Expand</a><br>
+   <LI><a class="x" href="#C.2.4">JSP Compile</a><br>
+  </UL>
+  <LI><a class="x" href="#C.3">Configuration Changes</a><br>
+  <UL>
+   <LI><a class="x" href="#C.3.1">EAR Show</a><br>
+   <LI><a class="x" href="#C.3.2">EAR Stop</a><br>
+   <LI><a class="x" href="#C.3.3">EAR Start</a><br>
+   <LI><a class="x" href="#C.3.4">EAR Remove</a><br>
+   <LI><a class="x" href="#C.3.5">EAR Backup</a><br>
+  </UL>
+ </UL>
+  <LI><a class="x" href="#E.0">D a t a S o u r c e s</a><br>
+  <UL>
+   <LI><a class="x" href="#E.1">DataSource Testing</a><br>
+  </UL>
+  <LI><a class="x" href="#F.0">R e m o t e  &nbsp; A g e n t s</a><br>
+  <UL>
+   <LI><a class="x" href="#F.1">Agent Status</a><br>
+   <LI><a class="x" href="#F.2">Agent Stop</a><br>
+   <LI><a class="x" href="#F.2">Agent Start</a><br>
+  </UL>
+</UL>
+</TABLE>
+
+<P>
+
+ <LI><a name="A.0"><STRONG>I n t r o d u c t i o n</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+The GUI Websphere Admin Console is the default tool for administrative tasks.  &nbsp;
+<br>
+Alternatively, the Websphere Admin Utility can be used to execute many of these tasks from the command line.  &nbsp;
+
+ </div>
+<p>
+ <UL>
+  <LI><a name="A.1"><STRONG>Summary</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+This is a reference of admin commands that support, deploy and monitor the Websphere application distributed infra-structure.
+<p>
+
+Command Usage references look like this:
+
+<pre class="y">
+ 
+usage: was4nd groupShow myServerGroup
+ 
+</pre>
+Command Example references look like this:
+<pre class="code">
+ 
+(wasadmin@teak04t)>was4nd groupShow TPT
+Mon Dec 8 20:34:36 CST 2003 was4nd groupShow TPT begin
+{FullName /ServerGroup:TPT/}
+{FullName /Node:teak04t/ApplicationServer:TPT/} {CurrentState Running} {DesiredState Running}
+{FullName /Node:elm04q/ApplicationServer:TPT/} {CurrentState Running} {DesiredState Running}
+Mon Dec 8 20:35:21 CST 2003 was4nd groupShow TPT end
+
+</pre>
+
+  <LI><a name="A.2"><STRONG>Perspective</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+Depending on the perspective, admin commands offer different advantages:
+<UL>
+<LI>For Support, speed & simplicity.  admin commands are executed from a telnet session
+<LI>For Development, continuous & consistent deployment across environments
+<LI>For Quality Assurance, automated deployment is the precursor to automated testing
+<LI>For Administration, scripting of mundane & repetitive tasks
+<LI>For Management, fine-grain control of roles & responsibilities
+</UL>
+</UL>
+
+<P>
+<LI><a name="B.0"><STRONG>E n v i r o n m e n t s</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+The operating environment includes (a) application servers, to which applications are deployed; and (b) web servers, to which plug-ins (and static content) are deployed.  
+</div>
+<p>
+The Websphere admin server must be operational before performing administrative tasks, and the administrator must be logged in with the administrative account.
+
+ <UL>
+  <LI><a name="B.1"><STRONG>Production environment</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+The production operating environment includes
+<UL>
+<li>app server nodes teak06p and elm05p
+<li>web server nodes uschswsprod0, uschswsprod1, usoaswsweb0, usoaswsweb1
+</UL>
+<p>
+  <LI><a name="B.2"><STRONG>Pre-Production environment</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+The pre-production operating environment includes
+<UL>
+<li>app server nodes teak04t and elm04q
+<li>web server nodes uschswsuat0, uschswsuat1, usoaswstpreweb0, usoaswstpreweb1
+</UL>
+<p>
+  <LI><a name="B.3"><STRONG>XML export environment</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+
+<br>
+xmlConfigExport is the command that exports the complete environment to an xml file.  This might be for backup or for difference reporting purposes.
+<br>
+
+<pre class="y">
+ 
+usage: was4nd xmlConfigExport 
+
+</pre>
+
+xmlConfigExport command example:
+
+<pre class="z">
+ 
+(wasadmin@teak06p)>was4nd xmlConfigExport
+Mon Jan 16 13:52:09 CST 2004 was4nd xmlConfigExport begin
+[1/16/04 13:52:29:468 CST]    b4b2f VirtualHostCo A XMLC0052I: Exporting VirtualHost : TPT
+.
+.
+[1/16/04 13:52:38:542 CST]    b4b2f DataSourceCon A XMLC0052I: Exporting DataSource : MaxTrad
+.
+.
+[1/16/04 13:54:15:365 CST]    b4b2f ServerGroupCo A XMLC0052I: Exporting ServerGroup : TPT
+.
+.
+[1/16/04 13:55:38:323 CST]    b4b2f EnterpriseApp A XMLC0052I: Exporting EnterpriseApp : TPT
+.
+.
+export file is ready: /tmp/xmlConfig-teak06p-040116135209.xml
+Mon Jan 16 13:56:59 CST 2004 was4nd xmlConfigExport end
+(wasadmin@teak06p)>
+
+</pre>
+
+ </UL>
+ <LI><a name="G.0"><STRONG>S e r v e r s</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Server admin commands come in two varieties - single server commands and server group commands.
+</div>
+<p>
+ </UL>
+
+  <LI><a name="G.1"><STRONG>Single Servers</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Single server commands manipulate single servers.  
+Note that server group commands are usually more appropriate to stop / start an application. 
+</div>
+<p>
+  <UL>
+   <LI><a name="G.1.1"><STRONG>Server Show</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+serverShow is the command that shows the current status of a single application server on a specific node
+
+<pre class="y">
+ 
+usage: was4nd serverShow node myServer
+   node     - dns name, e.g: teak04t, elm05p
+   myServer - application server, e.g: TPT, FSD-SFO
+
+</pre>
+
+serverShow command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd serverShow  teak04t FRA
+Mon Dec 8 21:06:02 CST 2003 was4nd serverShow teak04t FRA begin
+{FullName /Node:teak04t/ApplicationServer:FRA/} {CurrentState Running} {DesiredState Running}
+Mon Dec 8 21:06:28 CST 2003 was4nd serverShow teak04t FRA end
+you have mail in /usr/mail/wasadmin
+
+</pre>
+
+<p>
+   <LI><a name="G.1.2"><STRONG>Server Stop</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+serverStop is the command that stops a single application server on a specific node.
+
+<pre class="y">
+ 
+usage: was4nd serverStop node myServer
+   node     - dns name, e.g: teak04t, elm05p
+   myServer - application server, e.g: TPT, FSD-SFO
+
+</pre>
+
+serverStop command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd serverStop  teak04t FRA
+Mon Dec 8 21:17:30 CST 2003 was4nd serverStop teak04t FRA begin
+Mon Dec 8 21:17:55 CST 2003 was4nd serverStop teak04t FRA end
+
+</pre>
+
+<p>
+   <LI><a name="G.1.3"><STRONG>Server Start</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+serverStart is the command that starts a single application server on a specific node.
+
+<pre class="y">
+ 
+usage: was4nd serverStart node myServer
+   node     - dns name, e.g: teak04t, elm05p
+   myServer - application server, e.g: TPT, FSD-SFO
+
+</pre>
+
+serverStart command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd serverStart  teak04t FRA
+Mon Dec 8 21:21:48 CST 2003 was4nd serverStart teak04t FRA begin
+Mon Dec 8 21:22:16 CST 2003 was4nd serverStart teak04t FRA end
+(wasadmin@teak04t)>
+
+</pre>
+
+<p>
+  </UL>
+  <LI><a name="G.2"><STRONG>Server Groups</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Server Group commands manipulate server groups, which are collections of single servers.
+These commands manipulate the server group.
+</div>
+<p>
+  <UL>
+   <LI><a name="G.2.1"><STRONG>ServerGroup Show</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+groupShow is the command that shows the current status of an application server group.  
+
+<pre class="y">
+ 
+usage: was4nd groupShow myServerGroup
+
+</pre>
+
+groupShow command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd groupShow TPT
+Mon Dec 8 20:34:36 CST 2003 was4nd groupShow TPT begin
+{FullName /ServerGroup:TPT/}
+{FullName /Node:teak04t/ApplicationServer:TPT/} {CurrentState Running} {DesiredState Running}
+{FullName /Node:elm04q/ApplicationServer:TPT/} {CurrentState Running} {DesiredState Running}
+Mon Dec 8 20:35:21 CST 2003 was4nd groupShow TPT end
+
+</pre>
+
+<p>
+   <LI><a name="G.2.2"><STRONG>ServerGroup Stop</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+groupStop is the command that stops an application server group.  
+
+<pre class="y">
+ 
+usage: was4nd groupStop myServerGroup
+
+</pre>
+
+groupStop command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd groupStop FRA
+Mon Dec 8 20:48:46 CST 2003 was4nd groupStop FRA begin
+Mon Dec 8 20:49:15 CST 2003 was4nd groupStop FRA end
+
+</pre>
+
+   <LI><a name="G.2.3"><STRONG>ServerGroup Start</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+groupStart is the command that starts an application server group.  
+
+<pre class="y">
+ 
+usage: was4nd groupStart myServerGroup
+
+</pre>
+
+groupStart command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd groupStart FRA
+Mon Dec 8 20:50:27 CST 2003 was4nd groupStart FRA begin
+Mon Dec 8 20:50:58 CST 2003 was4nd groupStart FRA end
+
+</pre>
+
+   <LI><a name="G.2.4"><STRONG>ServerGroup Ripple</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+To ripple means to stop and start, in sucession, each application server of a server group. 
+groupRipple is the command that ripples a server group.  
+
+<pre class="y">
+ 
+usage: was4nd groupRipple myServerGroup
+
+</pre>
+
+groupRipple command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd groupRipple FRA
+Mon Dec 8 20:55:02 CST 2003 was4nd groupRipple FRA begin
+{FullName /ServerGroup:FRA/}
+Stopping /Node:teak04t/ApplicationServer:FRA/
+Starting /Node:teak04t/ApplicationServer:FRA/
+Stopping /Node:elm04q/ApplicationServer:FRA/
+Starting /Node:elm04q/ApplicationServer:FRA/
+Mon Dec 8 20:55:38 CST 2003 was4nd groupRipple FRA end
+
+</pre>
+<p>
+
+</UL>
+
+
+  <LI><a name="#H.1"><STRONG>J a v a &nbsp; V i r t u a l &nbsp; M a c h i n e s (JVM)</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Each application server has a Java Virtual Machine (JVM).  &nbsp; 
+JVM system properties (JVMSP) are building blocks with which an application server JVM is configured. &nbsp; 
+There are 500 JVMSPs within each environment to administer.  &nbsp; 
+</div>
+<p>
+
+  <UL>
+
+   <LI><a name="#H.1.1"><STRONG>JVM System Properties (JVMSP)</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+
+<p>
+<div>
+The JVM system property (JVMSP) declares a property name=value pair on the java command line with the "-D" option.  &nbsp; 
+JVMs typically read their JVMSPs upon startup, for example:
+</div>
+<pre class="z">
+This program:
+   public class getSystemPropertiesExample {    
+     static public void main(String[] args) {        
+       System.getProperties() . list( System.out ) ;
+     }
+   }
+
+With this command line:
+   java -DPORTAL_URL="http://maxtrad.com" getSystemPropertiesExample 
+
+Produces this output:
+   PORTAL_URL="http://maxtrad.com"
+</pre>
+
+<p>
+
+JVMSPs are configured for individual servers, for the server group, or both. &nbsp; 
+Different server groups follow different configuration policies within the same environment. &nbsp; 
+No single policy is optimal for all application servers. &nbsp; 
+These complexities pose a challenge to JVMSP change and administration.  &nbsp; 
+<p>
+The Websphere Admin Console is the default JVMSP editing tool.  &nbsp; 
+It does not provides a global view of related JVMSPs. &nbsp; 
+Viewing all the related JVMSPs with the Websphere Admin Console requires multiple round trip fetches to the repository database.  &nbsp; 
+Editing the JVMSP with the Websphere Admin Console is time-consuming and error prone. &nbsp; 
+Resulting JVMSP changes can be in-consistent and require additional verification. &nbsp; 
+Backing up the JVMSPs is recommended beforehand. &nbsp; 
+Re-starting the server is required after each iteration. &nbsp; 
+Verification, backup and re-start each extend the time required to update JVMSPs using the Websphere Admin Console. &nbsp; 
+
+<p>
+
+   <LI><a name="#x"><a name="#H.1.1.1"><STRONG>JVMSP XSLT Editors</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+
+<p>
+
+<div>
+The admin command utility includes 2 JVMSP XSLT editors to address these challenges. &nbsp; 
+For a given server, the JVMSP XSLT editors 
+</div>
+
+<p>
+<UL>
+ <LI> Export the server's configuration to an XML document
+ <LI> Backup the server's configuration in case of rollback
+ <LI> Transform the server's configuration using an XSLT processor & templates
+ <LI> Import the transformed configuration back into the server
+</UL>
+
+
+<p>
+The JVMSP XSLT editors use the following command-line parameters: &nbsp; 
+<p>
+
+<OL>
+ <LI> Server name.  &nbsp; Changes are applied to only this server 
+ <LI> Update type.  &nbsp; Valid update parameter values:
+ <UL>
+  <LI> 'set' for change. &nbsp; properties are changed
+  <LI> 'del' for delete. &nbsp; properties are deleted
+ </UL>
+ <LI> Update scope.  &nbsp; Valid scope parameter values:
+ <UL>
+  <LI> a specific server 
+  <LI> 'servers' for all servers in the group
+  <LI> 'group'   for only the group and not the servers
+  <LI> 'ALL'     for all servers in the group as well as the group
+ </UL>
+ <LI> Property name
+ <UL>
+  <LI> names may not contain white space 
+  <LI> names may not contain special characters such as :"@#&^+|~!$*'/.?
+ </UL>
+ <LI> Property value
+ <UL>
+  <LI> if 'properly quoted', values may contain white space 
+  <LI> if 'properly quoted', values may contain special characters such as :"@#&^+|~!$*'/.?
+ </UL>
+</OL>
+
+</div>
+
+<pre class="y">
+ 
+usage: was4nd jvmspEdit $server  $op  $scope  $property  $value
+       |      |         |        |    |       |          |
+       |      |         |        |    |       |          \- property value
+       |      |         |        |    |       \------------ property name
+       |      |         |        |    \-------------------- update scope 
+       |      |         |        \------------------------- update type
+       |      |         \---------------------------------- server name
+       \      \-------------------------------------------- jvmspEdit command 
+       \--------------------------------------------------- websphere command utility name
+
+</pre>
+
+<p>
+
+   <LI><a name="#H.1.1.1.1"><STRONG>single changes</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+
+<P>
+<div>
+Single JVMSP changes can be executed with the jvmspEdit command.  &nbsp; 
+The jvmspEdit command requires the command-line parameters listed above
+</div>
+
+<pre class="y">
+ 
+usage: was4nd jvmspEdit $server  $op  $scope  $property  $value
+
+</pre>
+
+jvmspEdit command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd jvmspEdit TPT set elm04q nameX  valX
+Tue Feb 17 13:00:56 CST 2004 was4nd jvmspBatchExport TPT begin
+[2/17/04 13:01:19:370 CST]   337d0f ServerGroupCo A XMLC0060E: Processing partial export for ServerGroup : TPT
+[2/17/04 13:01:20:787 CST]   337d0f ServerGroupCo A XMLC0052I: Exporting ServerGroup : TPT
+Tue Feb 17 13:01:28 CST 2004 was4nd jvmspBatchExport TPT end
+Tue Feb 17 13:01:29 CST 2004 was4nd jvmspBatchEdit TPT begin
+0
+beginning edit 1 of TPT
+Tue Feb 17 13:01:33 CST 2004 was4nd jvmspBatchEdit TPT end
+Tue Feb 17 13:01:34 CST 2004 was4nd jvmspBatchImport TPT begin
+there are 1 changes(s) to commit
+Here is a summary of the 1 change(s) to be committed:
+< <property name="nameX" value="valX"/>
+[2/17/04 13:01:54:148 CST]   337d0f ServerGroupCo A XMLC0053I: Importing ServerGroup : TPT
+Tue Feb 17 13:02:00 CST 2004 was4nd jvmspBatchImport TPT end
+
+</pre>
+
+
+   <LI><a name="#H.1.1.1.2"><STRONG>batch  changes</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+
+
+<P>
+<div>
+Batch JVMSP changes are executed with 3 commands - jvmspBatchExport, jvmspBatchEdit and jvmspBatchImport.  &nbsp; 
+The jvmspBatchEdit command requires the same command-line parameters listed above. &nbsp; 
+In the previous example, note that jvmspEdit actually calls the batch commands &nbsp; 
+<P>
+Batch commands are most useful in two scenarios:
+</div>
+<P>
+
+<UL>
+<LI> To make multiple changes.  &nbsp; Export once, make multiple JVMSP edits, and import once.
+<LI> To Review changes before import.
+</UL>
+
+</div>
+
+<pre class="y">
+ 
+perform this just once ... usage: was4nd jvmspBatchExport $server  
+perform this "N" times ... usage: was4nd jvmspBatchEdit $server  $op  $scope  $property  $value
+perform this just once ... usage: was4nd jvmspBatchImport
+
+</pre>
+
+Batch command example:
+
+<pre class="z">
+(wasadmin@teak04t)>was4nd jvmspBatchExport TPT
+Tue Feb 17 18:51:37 CST 2004 was4nd jvmspBatchExport TPT begin
+[2/17/04 18:51:59:300 CST]   337d0f ServerGroupCo A XMLC0060E: Processing partial export for ServerGroup : TPT
+[2/17/04 18:52:00:769 CST]   337d0f ServerGroupCo A XMLC0052I: Exporting ServerGroup : TPT
+Tue Feb 17 18:52:08 CST 2004 was4nd jvmspBatchExport TPT end 
+
+(wasadmin@teak04t)>was4nd jvmspBatchEdit TPT del elm04q nameX  valX
+Tue Feb 17 18:54:18 CST 2004 was4nd jvmspBatchEdit TPT begin
+beginning edit 1 of TPT
+Tue Feb 17 18:54:22 CST 2004 was4nd jvmspBatchEdit TPT end
+
+(wasadmin@teak04t)>was4nd jvmspBatchImport TPT
+Tue Feb 17 18:54:55 CST 2004 was4nd jvmspBatchImport TPT begin
+there are 1 changes(s) to commit
+Here is a summary of the 1 change(s) to be committed:
+46c46
+<
+---
+>                         <property name="nameX" value="valX"/>
+do you wish to continue (Y/N) ? y
+was4nd jvmspBatchImport TPT importing, please wait ...
+[2/17/04 18:55:22:853 CST]   337d0f ServerGroupCo A XMLC0053I: Importing ServerGroup : TPT
+Tue Feb 17 18:55:28 CST 2004 was4nd jvmspBatchImport TPT end
+
+</pre>
+
+</UL>
+
+<p>
+
+<UL>
+<LI>Other Notes
+<LI>In contrast to the other admin commands, the JVMSP editors are not yet functional in multi-user mode.  &nbsp; 
+<LI>One of the generated xml files includes the all server properties. &nbsp; 
+    This can be used as a template with which any server property can be edited and imported.  &nbsp; 
+</UL>
+
+<p>
+
+<UL>
+<LI>List of generated files.  &nbsp; Example: TPT
+<LI>TPT-export1.xml.040212173659 - time-stamped backup xml configuration
+<LI>TPT-export1.xml - complete XMLConfig export for one application sever
+<LI>TPT-export2-clean.xml - cleaned up, smaller than original, easier to edit, view and print
+<LI>TPT-edit0.xml - xml document after first transformation
+<LI>TPT-editN.xml - xml document after N transformations
+<LI>TPT-import1.xml - xml document to be imported
+</UL>
+
+<p>
+
+  <LI><a name="D.0"><STRONG>P l u g i n s</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Plugin-cfg.xml is the file that configures how web servers forward requests to app server.  
+Thus, it is an key involved in some deployments.  See IBM documentation.  
+</div>
+<p>
+  <UL>
+   <LI><a name="D.1"><STRONG>Plugin Regeneration</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+pluginRegen is the command to regenerate the plugin.  This command:
+<ul>
+<li>backups the existing plugin
+<li>regenerates the plugin for all nodes
+<li>edits the plugin to account for the different directory on the web server
+</UL>
+<p>
+<pre class="y">
+ 
+usage: was4nd pluginRegen
+ 
+</pre>
+
+pluginRegen command example:
+
+<pre class="z">
+  
+(wasadmin@teak04t)>was4nd pluginRegen
+Sun Dec 14 18:35:04 CST 2003 was4nd pluginRegen begin
+Plugin regeneration scheduled for /Node:teak04t/
+Plugin regeneration scheduled for /Node:elm04q/
+Sun Dec 14 18:35:30 CST 2003 was4nd pluginRegen end
+(wasadmin@teak04t)>was4nd pluginDeploy
+  
+</pre>
+
+   <LI><a name="D.2"><STRONG>Plugin Deployment</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+pluginCopy is the command to copy the plugin-cfg.xml file to the Intranet web servers.  p.xml is the file copied. 
+<p>
+
+<pre class="y">
+ 
+usage: was4nd pluginCopy
+ 
+</pre>
+
+pluginCopy command example:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd pluginCopy
+Sun Dec 14 18:42:37 CST 2003 was4nd pluginCopy begin
+Sun Dec 14 18:42:39 CST 2003 was4nd pluginCopy copy to uschswsuat0
+Sun Dec 14 18:42:40 CST 2003 was4nd pluginCopy copy to uschswsuat1
+Sun Dec 14 18:42:40 CST 2003 was4nd pluginCopy done
+ 
+</pre>
+
+
+</UL>
+
+
+<LI><a name="C.0"><STRONG>A p p l i c a t i o n s</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Applications are installed from J2EE <b>E</b>nterprise <b>A</b>pplication a<b>R</b>chive (EAR) files.  Applications are deployed to Server groups.  Server groups are composed of application servers.
+</div>
+
+<p>
+
+  <LI><a name="C.2"><STRONG>Network Deployments</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Network deployments require an agent to be running on the remote node(s).  Applications are deployed from teak and the agent runs on elm.   
+</div>
+<p>
+The network deployment functions have an email option.  
+The deployment log is emailed to the address supplied as the last parameter.
+
+<p>
+
+  <UL>
+   <LI><a name="C.2.1"><STRONG>EAR Install</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+The ear install 
+  <UL>
+  <LI> backs up the current application 
+  <LI> stops the server group
+  <LI> deletes the current application 
+  <LI> installs the new application 
+  <LI> assigns a virtual host to the web app component
+  <LI> distributes binaries to the remote node(s)
+  <LI> creates a deployment log, with an email option
+  </UL>
+
+<p>
+
+The current version of the EAR install program makes two assumptions:
+  <uL>
+  <LI> server and virtual host names are identical.  This is true of all current applications.
+  <LI> one WAR component per application.  This is true of all current applications.
+  </UL>
+
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earInstall  Application  Server  EarFilePath [emailAddress]
+        Application - e.g: MaxtradLite, CFO-Central
+        Server      - e.g: TPT, CLD, DT
+        EarFilePath - e.g: TPT_ver_1.2.3.ear
+        [email]     - e.g: john.doe 
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earInstall DT DT /tmp/031212140048--DT.ear
+Fri Dec 12 14:09:07 CST 2003 was4nd begin
+Fri Dec 12 14:09:10 CST 2003 ping remote agent elm04q....
+Fri Dec 12 14:09:17 CST 2003 was4nd invoke wscp install app
+node     = teak04t
+appname  = DT
+sname    = DT
+earfile  = /tmp/031212140048--DT.ear
+warname  = DTWeb
+vhost    = DT
+vhostmap = {DTWeb.war DT}
+appExists=21
+Stopping  : DT
+Removing  : DT
+Installing: DT
+Installed : DT
+Fri Dec 12 14:11:37 CST 2003 was4nd chwas
+Fri Dec 12 14:12:03 CST 2003 was4nd tar
+Fri Dec 12 14:12:08 CST 2003 was4nd send binaries to elm04q.........
+Fri Dec 12 14:13:22 CST 2003 was4nd end
+ 
+</pre>
+
+More earInstall examples:
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>#                        Application     Server    EAR file
+(wasadmin@teak04t)>#                        -----------     -------   --------
+(wasadmin@teak04t)>~/wasu/was4nd earInstall CFO-Central     FSD-CFO   /i2k/web/sites/was40/Finance.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall FIP             FSD-CFO   /i2k/web/sites/was40/FIP.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall SFO-StrucFin    FSD-SFO   /i2k/web/sites/was40/SFO-StrucFin.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall SFO-StrucFin-NL FSD-SFO   /i2k/web/sites/was40/SFO-StrucFin-NL.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall AuthSign        FSD-SFO   /i2k/web/sites/was40/AuthSign.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall SFO-Procurement FSD-SFO   /i2k/web/sites/was40/SFO-Proc.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall SFO-Resources   FSD-SFO   /i2k/web/sites/was40/SFO-Resources.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall SFO-Seps        FSD-SFO   /i2k/web/sites/was40/SFO-Seps.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall CLD_Vendor      CLD       /i2k/web/sites/was40/CLD_Vendor.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall LIM             CLD       /i2k/web/sites/was40/LIM.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall EPDNET          EPDNET    /i2k/web/sites/was40/EPDNET.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall CrossSell       CrossSell /i2k/web/sites/was40/CrossSell.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall DT              DT        /i2k/web/sites/was40/DT.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall FRA             FRA       /i2k/web/sites/was40/FRA.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall GGOL            GGOL      /i2k/web/sites/was40/GGOL.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall Harvest         Harvest   /i2k/web/sites/was40/Harvest.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall ITK             ITK       /i2k/web/sites/was40/ITK.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TCA             TCA       /i2k/web/sites/was40/TCA.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TFI             TFI       /i2k/web/sites/was40/TFI.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TOA             TOA       /i2k/web/sites/was40/TOA.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TPT             TPT       /i2k/web/sites/was40/TPT.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TSA             TSA       /i2k/web/sites/was40/TSA.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TSP             TSP       /i2k/web/sites/was40/TSP.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall MaxtradLite     TPT       /i2k/web/sites/was40/MaxtradLite4.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall MMS             MMS       /i2k/web/sites/was40/MMS.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall PSS             PSS       /i2k/web/sites/was40/PSS.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TSG-Q           TSG-Q     /i2k/web/sites/was40/TSG-Q.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall TSG             TSG       /i2k/web/sites/was40/TSG.ear
+(wasadmin@teak04t)>~/wasu/was4nd earInstall WPD             WPD       /i2k/web/sites/was40/WPD.ear
+
+</pre>
+
+<p>
+
+   <LI><a name="C.2.2"><STRONG>EAR Install Warm</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+The difference between this command, earInstallWarm, and the previous one is that
+<UL>
+<LI>the enterprise application is stopped, not the application server
+<LI>the enterprise application is re-started after the installation.
+</UL>
+<br>
+Consequently, during a warm application installation, the servers are not stopped.  
+This is particularly useful for those applications that contain multiple applications.  
+It is intended for "well behaved" applications only.
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earInstallWarm  Application  Server  EarFilePath [emailAddress]
+        Application - e.g: MaxtradLite, CFO-Central
+        Server      - e.g: TPT, CLD, DT
+        EarFilePath - e.g: TPT_ver_1.2.3.ear
+        [email]     - e.g: john.doe 
+ 
+</pre>
+
+
+<pre class="z">
+
+(wasadmin@teak04t)> ~/wasu/was4nd earInstallWarm CFO-Central FSD-CFO /i2k/web/sites/was40/Finance.ear
+Fri Dec 5 10:12:33 CST 2003 was4nd begin
+Fri Dec 5 10:12:35 CST 2003 ping remote agent elm04q....
+Fri Dec 5 10:12:42 CST 2003 was4nd invoke wscp install app
+node     = teak04t
+appname  = CFO-Central
+sname    = FSD-CFO
+earfile  = /i2k/web/sites/was40/Finance.ear
+warname  = FSD-CFO
+vhost    = FSD-CFO
+vhostmap = {FSD-CFO.war FSD-CFO}
+appExists=12
+Stopping  : CFO-Central
+Removing  : CFO-Central
+Installing: CFO-Central
+Installed : CFO-Central
+Fri Dec 5 10:14:24 CST 2003 was4nd chwas
+Fri Dec 5 10:14:47 CST 2003 was4nd tar
+Fri Dec 5 10:14:49 CST 2003 was4nd send binaries to elm04q......
+Fri Dec 5 10:14:59 CST 2003 invoke wscp start app
+Starting  : CFO-Central
+{FullName /EnterpriseApp:CFO-Central/} {CurrentState Running} {DesiredState Running}
+Started   : CFO-Central
+Fri Dec 5 10:15:03 CST 2003 was4nd end
+
+</pre>
+<p>
+   <LI><a name="C.2.3"><STRONG>EAR Expand</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+The earExpand command invokes the IBM EARExpander utility.  
+earExpand expands the EAR file into the correct installedApps sub-directory (this directory is first deleted).
+While this is sufficient for many deployments, it requires knowledge of the changes involved.
+<font color=red>[pressc:] Tested in preprod not yet in prod. </font>
+
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earExpand Application  Server  EarFilePath [emailAddress]
+        Application - e.g: MaxtradLite, CFO-Central
+        Server      - e.g: TPT, CLD, DT
+        EarFilePath - e.g: TPT_ver_1.2.3.ear
+        [email]     - e.g: john.doe 
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earExpand 
+usage: ~/wasu/was4nd earExpand app svr ear
+
+</pre>
+
+<p>
+   <LI><a name="C.2.4"><STRONG>JSP Compile</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+
+The earJSPCompile command invokes the IBM JSPBatchCompiler utility.  
+It compiles JSP files from the installedApps directory, into the temp cache directory.  
+The IBM JSPBatchCompiler utility does not compile all JSPs, in particular those under the WEB-INF directory.
+There are also other issues that are not resolved without the current fixpack.  
+Care must be taken not to over-state this tool's capabilities.
+Nevertheless, pre-compiling JSPs can minimize the impact of many deployments.
+The JSPCompile command runs as the websphere admin account.  
+<font color=red>
+[pressc:] TODO: After this command is executed, file access rights need to be updated for the application account (e.g: dtuser).  Tested in preprod not yet in prod. 
+</font>
+
+
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earJSPCompile Application  [emailAddress]
+        Application - e.g: MaxtradLite, CFO-Central
+        [email]     - e.g: john.doe 
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earJSPCompile 
+usage: ~/wasu/was4nd earJSPCompile app 
+
+</pre>
+
+Here is a truncated example of the compilation log, which can be quite large.
+The email option can be used to transmit the log for further analysis.
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earJSPCompile MMS
+Connecting to repository...Done.
+Enterprise Application: MMS
+Found match -webModule [MMSWeb.war]
+Compiling Web Module: MMSWeb.war
+ear install root: [/i2k/web/soft/Was4.0/AppServer/installedApps/MMS.ear]
+compile:
+jsp parsed: [/CallActivityAdd.jsp]
+jsp parsed: [/CallActivityDeleteConfirmation.jsp]
+jsp parsed: [/CallActivityDetail.jsp]
+jsp parsed: [/CallActivityEdit.jsp]
+jsp parsed: [/CallActivityList.jsp]
+jsp parsed: [/CallReport.jsp]
+jsp parsed: [/CallReportForEntity.jsp]
+jsp parsed: [/CollateralFileImages.jsp]
+jsp parsed: [/CollateralFileRetrieval.jsp]
+jsp parsed: [/CompanyAffiliationsList.jsp]
+jsp parsed: [/CompanyContacts.jsp]
+jsp parsed: [/CompanyProfile.jsp]
+jsp parsed: [/CompanyProfileEdit.jsp]
+jsp parsed: [/CompanyQBESearch.jsp]
+jsp parsed: [/CompanySearch.jsp]
+.
+.
+.
+</pre>
+
+
+
+<p>
+  </UL>
+  <LI><a name="C.3"><STRONG>Configuration Changes</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>  <UL>
+<p>
+<div>
+These configuration commands do not require a remote deployment agent.
+</div>
+
+<p>
+  <LI><a name="C.3.1"><STRONG>EAR Show</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+The earShow command shows the current run-time status of an enterprise application.
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earShow Application  
+        Application - e.g: MaxtradLite, CFO-Central
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earShow MaxtradLite
+Mon Dec 8 13:19:56 CST 2003 was4nd earShow MaxtradLite begin
+{FullName /EnterpriseApp:MaxtradLite/} {CurrentState Running} {DesiredState Running}
+Mon Dec 8 13:20:21 CST 2003 was4nd earShow MaxtradLite end
+
+</pre>
+
+<p>
+  <LI><a name="C.3.2"><STRONG>EAR Stop</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+
+The earStop command stops an enterprise application.  
+The stop command is not instantaneous.  
+Complex applications require more time to stop. 
+Some applications can be installed without stopping the app server container.  
+In this case, the application must first be stopped.  
+All applications must be stopped before they can be deleted.
+
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earStop Application  
+        Application - e.g: MaxtradLite, CFO-Central
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earStop FRA
+Mon Dec 8 13:24:25 CST 2003 was4nd earStop FRA begin
+Stopping: FRA
+{FullName /EnterpriseApp:FRA/} {CurrentState Stopped} {DesiredState Stopped}
+Stopped : FRA
+Mon Dec 8 13:24:51 CST 2003 was4nd earStop FRA end
+
+</pre>
+
+<p>
+  <LI><a name="C.3.3"><STRONG>EAR Start</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+
+The earStart command starts an enterprise application.  This command is not instantaneous.  
+Complex applications require more starting time.  
+As just discussed, an application can be installed without stopping the app server that contains it.  
+In this case, the application is started after it is installed, while the app server is running.
+
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earStart Application  
+        Application - e.g: MaxtradLite, CFO-Central
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earStop FRA
+Mon Dec 8 13:24:25 CST 2003 was4nd earStart FRA begin
+Starting: FRA
+{FullName /EnterpriseApp:FRA/} {CurrentState Started} {DesiredState Started}
+Started : FRA
+Mon Dec 8 13:24:51 CST 2003 was4nd earStart FRA end
+
+</pre>
+
+<p>
+  <LI><a name="C.3.4"><STRONG>EAR Remove</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+
+The earRemove command removes an enterprise application.  
+An application must be stopped before it can be removed.  
+The earRemove command is automatically called by the earInstall command when a pre-existing application is installed.  
+This command is required for an application name change.
+
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earRemove Application  
+        Application - e.g: MaxtradLite, CFO-Central
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earRemove FRA
+Mon Dec 8 13:24:25 CST 2003 was4nd earRemove FRA begin
+Removed: FRA
+Mon Dec 8 13:24:51 CST 2003 was4nd earStart FRA end
+ 
+</pre>
+
+<p>
+  <LI><a name="C.3.5"><STRONG>EAR Backup</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+
+The earBackup command creates a backup of an enterprise application.  
+It invokes the IBM EARExpander utility to collapse the application directory into an EAR file.  
+The backup ear file is created in the /tmp directory.  
+
+<pre class="y">
+ 
+Command line usage:
+  was4nd  earBackup Application  
+        Application - e.g: MaxtradLite, CFO-Central
+
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>~/wasu/was4nd earBackup FRA
+Mon Dec 8 13:40:38 CST 2003 was4nd earBackup FRA begin EARExpander
+IBM WebSphere Application Server, Release 4.0
+J2EE Application Expansion Tool, Version 1.0.1
+Copyright IBM Corp., 1997-2001
+Collapsing /i2k/web/soft/Was4.0/AppServer/installedApps/FRA.ear into /tmp/031208134038--FRA.ear...
+Mon Dec 8 13:41:24 CST 2003 was4nd earBackup FRA end created backup ear /tmp/031208134038--FRA.ear
+
+</pre>
+
+  </UL>
+
+
+  <LI><a name="E.0"><STRONG>D a t a S o u r c e s</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+DataSources are configuration components that pool JDBC database connections.  DataSources enable connections to relational databases.
+</div>
+<p>
+  <UL>
+   <LI><a name="E.1"><STRONG>DataSource Testing</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+The dataSourceTest command iterates over all dataSources and tests each connection.
+<p>
+
+<pre class="y">
+ 
+Command line usage:
+ 
+  was4nd  dataSourceTest
+ 
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@teak04t)>was4nd dataSourceTest
+Sun Dec 14 18:43:56 CST 2003 was4nd dataSourceTest begin
+Testing DataSource connections
+/JDBCDriver:Oracle/DataSource:TSG_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:cfoDB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:JSQL/DataSource:Appro/ : WSCP00179I: Test connection was not successful.  
+/JDBCDriver:Oracle/DataSource:Documentum/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:CfoFinanceDB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:TSGPST_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:CDBDataSource/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:ggolDS/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:TPT_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:TSP_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:FINFO_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:DB2/DataSource:TSG_DB2/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:DB2/DataSource:TSGPST_DB2/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:JSQL/DataSource:Loan Center/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:FSD-StrucFinUS/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:FSD-StrucFinNL/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:DocumentumIntegration/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:AuthSign_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:SEPS_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:TCADataSource/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:FSD-SFO-AuthorizedSigner/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:TOA_odb/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:Oracle/DataSource:EPDNET/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:MSSQL/DataSource:PSS/ : WSCP00179I: Test connection was not successful.  
+/JDBCDriver:Oracle/DataSource:SolDel_ODB/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:MSSQL/DataSource:MaxTrad5/ : WSCP00179I: Test connection was not successful.  
+/JDBCDriver:Oracle/DataSource:TFI/ : {WSCP00178I: Test connection was successful.}
+/JDBCDriver:MSSQL/DataSource:BirData/ : WSCP00179I: Test connection was not successful.  
+Sun Dec 14 18:44:42 CST 2003 was4nd dataSourceTest end
+ 
+</pre>
+
+
+  </UL>
+  <LI><a name="F.0"><STRONG>R e m o t e  &nbsp; A g e n t s</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<p>
+<div>
+Deployment Agents are light-weight listeners that run on remote nodes required for network deployments.  
+The remote nodes for production and pre-production are elm05q and elm04q, respectively.
+</div>
+<p>
+  <UL>
+   <LI><a name="F.1"><STRONG>Agent Status</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+agentShow is the command that shows the runtime status of the deployment agent.
+<pre class="y">
+ 
+Command line usage:
+ 
+  was4nd agentStatus
+ 
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@elm04q)>~/wasu/was4nd  agentStatus
+agent is running ....
+ 
+</pre>
+
+<p>
+   <LI><a name="F.2"><STRONG>Agent Stop</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+agentStop is the command that stops the deployment agent. 
+<pre class="y">
+ 
+Command line usage:
+ 
+  was4nd agentStop
+ 
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@elm04q)>~/wasu/was4nd  agentStop
+agent is stopped ....
+ 
+</pre>
+
+<p>
+   <LI><a name="F.2"><STRONG>Agent Start</STRONG></a>&nbsp;&nbsp;&nbsp;<a href="#top">...top</a>
+<br>
+agentStart is the command that starts the deployment agent. 
+<pre class="y">
+ 
+Command line usage:
+ 
+  was4nd agentStart
+ 
+</pre>
+
+<pre class="z">
+ 
+(wasadmin@elm04q)>~/wasu/was4nd  agentStart
+agent is starting ....
+ 
+</pre>
+
+</UL>
+
+
+</UL>
+
+</body>
+</html>
